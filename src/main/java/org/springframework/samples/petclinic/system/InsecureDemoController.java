@@ -2,7 +2,7 @@ package org.springframework.samples.petclinic.system;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class InsecureDemoController {
 
-    @GetMapping("/insecure-demo")
-    String insecureDemo(@RequestParam String ownerName) throws Exception {
+    @GetMapping("/secure-demo")
+    String secureDemo(@RequestParam String ownerName) throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:h2:mem:testdb", "sa", "");
-        Statement statement = connection.createStatement();
 
-        String query = "SELECT * FROM owners WHERE first_name = '" + ownerName + "'";
-        statement.executeQuery(query);
+        String query = "SELECT * FROM owners WHERE first_name = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, ownerName);
+        statement.executeQuery();
 
-        return "Consulta ejecutada";
+        return "Consulta segura ejecutada";
     }
 }
