@@ -11,7 +11,7 @@ class InsecureDemoController {
 
 	@GetMapping("/insecure-cookie")
 	String insecureCookie(HttpServletResponse response) {
-		Cookie cookie = new Cookie("session_demo", "123456");
+		Cookie cookie = new Cookie("session_demo", "12345");
 		response.addCookie(cookie);
 
 		return "Cookie insegura creada";
