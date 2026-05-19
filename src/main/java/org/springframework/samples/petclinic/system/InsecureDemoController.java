@@ -16,7 +16,7 @@ class InsecureDemoController {
         Connection connection = DriverManager.getConnection("jdbc:h2:mem:testdb", "sa", "");
         Statement statement = connection.createStatement();
 
-        String query = "SELECT * FROM owners WHERE first_name = '" + ownerNam + "'";
+        String query = "SELECT * FROM owners WHERE first_name = '" + ownerName + "'";
         statement.executeQuery(query);
 
         return "Consulta ejecutada";
