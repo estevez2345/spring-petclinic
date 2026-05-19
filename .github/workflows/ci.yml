@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - feature/add-ci-pipelin
+      - feature/add-ci-pipeline
   pull_request:
     branches:
       - main
