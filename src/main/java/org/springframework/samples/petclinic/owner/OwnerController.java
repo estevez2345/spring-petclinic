@@ -94,6 +94,12 @@ class OwnerController {
 	@GetMapping("/owners")
 	public String processFindForm(@RequestParam(defaultValue = "1") int page, Owner owner, BindingResult result,
 			Model model) {
+
+		// Incidente simulado para el paso 9: fuerza error 500 en /owners
+		if ("true".equalsIgnoreCase(System.getenv("INCIDENT_OWNERS_500"))) {
+			throw new RuntimeException("Incidente simulado: /owners retorna error 500");
+		}
+
 		// allow parameterless GET request for /owners to return all records
 		String lastName = owner.getLastName();
 		if (lastName == null) {
